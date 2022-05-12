@@ -21,6 +21,5 @@ k8s_custom_deploy(
 k8s_resource('service-maintenance', port_forwards=["8080:8080"],
             extra_pod_selectors=[{'serving.knative.dev/service': 'service-maintenance'}])
 
-allow_k8s_contexts('tap-dhaka-pinniped')
-
+allow_k8s_contexts('gke_web-practice-fleet_europe-west4_tap')
 update_settings(k8s_upsert_timeout_secs = 180)
