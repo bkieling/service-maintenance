@@ -1,11 +1,21 @@
 spring:
   application:
-    name: tanzu-java-web-app
+    name: service-maintenance
+  datasource:
+    url: jdbc:hsqldb:mem:testdb
+  jpa:
+    hibernate:
+      ddl-auto: update
+  thymeleaf:
+    cache: false
 management:
   endpoints:
     web:
       exposure:
-        include: "*"  
+        include: "*"
   endpoint:
     health:
       show-details: always
+
+web:
+  message: Welcome to WeB Fleet Service/Maintenance
