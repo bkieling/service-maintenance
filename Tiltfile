@@ -1,6 +1,6 @@
-SOURCE_IMAGE = os.getenv("SOURCE_IMAGE", default='fcaroline/project/service-maintenance')
+SOURCE_IMAGE = os.getenv("SOURCE_IMAGE", default='fcaroline/service-maintenance')
 LOCAL_PATH = os.getenv("LOCAL_PATH", default='.')
-NAMESPACE = os.getenv("NAMESPACE", default='web-fleet-practice')
+NAMESPACE = os.getenv("NAMESPACE", default='webfleet')
 
 k8s_custom_deploy(
     'service-maintenance',
@@ -22,4 +22,4 @@ k8s_resource('service-maintenance', port_forwards=["8080:8080"],
             extra_pod_selectors=[{'serving.knative.dev/service': 'service-maintenance'}])
 
 allow_k8s_contexts('gke_web-practice-fleet_europe-west4_tap')
-update_settings(k8s_upsert_timeout_secs = 180)
+# update_settings(k8s_upsert_timeout_secs = 180)

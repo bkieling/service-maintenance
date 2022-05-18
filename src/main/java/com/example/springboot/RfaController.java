@@ -16,9 +16,12 @@ public class RfaController {
     private final Logger logger = LoggerFactory.getLogger(RfaController.class);
 
     private final RfaRepository rfaRepository;
+    private final RabbitMqMessageSender rabbitMqMessageSender;
 
-    public RfaController(RfaRepository rfaRepository) {
+
+    public RfaController(RfaRepository rfaRepository, RabbitMqMessageSender rabbitMqMessageSender) {
         this.rfaRepository = rfaRepository;
+        this.rabbitMqMessageSender = rabbitMqMessageSender;
     }
 
     @PostMapping(consumes = "text/plain")
@@ -26,7 +29,8 @@ public class RfaController {
     void uploadRfa(@RequestBody String rfa) {
         RfaEntity rfaEntity = new RfaEntity();
         rfaEntity.setContent(rfa);
-        rfaRepository.save(rfaEntity);
+        RfaEntity rfaEntity1 = rfaRepository.save(rfaEntity);
+        rabbitMqMessageSender.publishRfaUploadedEvent(rfaEntity1.getId());
     }
 
     @GetMapping(path = "/{id}")

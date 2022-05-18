@@ -33,7 +33,7 @@ public class Application {
 	}
 	
     	@Bean
-	public HttpTraceRepository htttpTraceRepository() {
+	public HttpTraceRepository httpTraceRepository() {
 		return new InMemoryHttpTraceRepository();
 	}
 }
