@@ -1,5 +1,6 @@
 package com.example.springboot;
 
+import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -13,6 +14,11 @@ public class RabbitMqConfig {
     @Bean
     public Queue rfaUploadedQueue() {
         return new Queue("rfa.uploaded");
+    }
+
+    @Bean
+    public FanoutExchange fanout() {
+        return new FanoutExchange("rfa.fanout");
     }
 
     @Bean
