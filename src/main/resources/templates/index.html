@@ -23,6 +23,9 @@
     <div class="starter-template">
         <h1><span th:text="${message}"/></h1>
         <h5>Status: running</h5>
+        <form action="" th:action="@{/rfa}" method="post">
+            <button name="sendbutton" value="sending">Send Message!</button>
+        </form>
     </div>
 </main>
 
