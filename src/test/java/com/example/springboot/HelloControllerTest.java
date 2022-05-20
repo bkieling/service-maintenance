@@ -1,6 +1,7 @@
 package com.example.springboot;
 
 import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.ui.Model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Ignore
+@Disabled
 @WebMvcTest(HelloController.class)
 class HelloControllerTest {
 
