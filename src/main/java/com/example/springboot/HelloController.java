@@ -31,10 +31,10 @@ public class HelloController {
 		return "index";
 	}
 
-//	@PostMapping("/rfa")
-//	public String uploadRFA(@RequestParam(name="rfaContent", required=false, defaultValue="Some RFA content")String rfaContent) {
-//		rfaController.uploadRfa(rfaContent);
-//		return "index";
-//	}
+	@PostMapping("/rfa")
+	public String uploadRFA(@RequestParam(name="rfaContent", required=false, defaultValue="Some RFA content")String rfaContent) {
+		rfaController.uploadRfa(rfaContent);
+		return "index";
+	}
 
 }
