@@ -16,10 +16,10 @@ public class RabbitMqConfig {
         return new Queue("rfa.uploaded");
     }
 
-    @Bean
-    public FanoutExchange fanout() {
-        return new FanoutExchange("rfa.fanout");
-    }
+//    @Bean
+//    public FanoutExchange fanout() {
+//        return new FanoutExchange("rfa.fanout");
+//    }
 
     @Bean
     public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
