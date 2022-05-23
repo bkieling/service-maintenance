@@ -34,9 +34,9 @@ public class RfaController {
     }
 
     @GetMapping(path = "/{id}")
-    ResponseEntity<String> downloadRfa(@PathVariable("id") Long id) {
+    ResponseEntity<RfaEntity> downloadRfa(@PathVariable("id") Long id) {
         return rfaRepository.findById(id)
-                .map(rfaEntity -> ResponseEntity.ok(rfaEntity.getContent()))
+                .map(rfaEntity -> ResponseEntity.ok(rfaEntity))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
