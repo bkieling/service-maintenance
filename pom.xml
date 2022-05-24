@@ -17,6 +17,7 @@
 	<properties>
 		<java.version>11</java.version>
 		<spring-cloud-starter-contract-verifier.version>3.1.2</spring-cloud-starter-contract-verifier.version>
+		<lombok.version>1.18.22</lombok.version>
 	</properties>
 
 	<licenses>
@@ -62,6 +63,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- hot swapping, disable cache for template, enable live reload -->

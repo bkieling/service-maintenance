@@ -1,72 +1,46 @@
 package com.example.springboot;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/rfa")
 public class RfaController {
 
-    private final Logger logger = LoggerFactory.getLogger(RfaController.class);
-
-    private final RfaRepository rfaRepository;
-    private final RabbitMqMessageSender rabbitMqMessageSender;
-
-
-    public RfaController(RfaRepository rfaRepository, RabbitMqMessageSender rabbitMqMessageSender) {
-        this.rfaRepository = rfaRepository;
-        this.rabbitMqMessageSender = rabbitMqMessageSender;
-    }
+    private final RfaService rfaService;
 
     @PostMapping(consumes = "text/plain")
     @ResponseStatus(HttpStatus.OK)
-    void uploadRfa(@RequestBody String rfa) {
-        RfaEntity rfaEntity = new RfaEntity();
-        rfaEntity.setContent(rfa);
-        RfaEntity rfaEntity1 = rfaRepository.save(rfaEntity);
-        rabbitMqMessageSender.publishRfaUploadedEvent(rfaEntity1.getId());
+    public void uploadRfa(@RequestBody String rfa) {
+        rfaService.saveRfaContent(rfa);
     }
 
     @GetMapping(path = "/{id}")
-    ResponseEntity<RfaDto> downloadRfa(@PathVariable("id") Long id) {
-        return rfaRepository.findById(id)
-                .map(rfaEntity -> ResponseEntity.ok(convertToRfaDto(rfaEntity)))
+    public ResponseEntity<RfaDto> getRfaById(@PathVariable("id") Long id) {
+        return rfaService.getRfaById(id)
+                .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping()
-    ResponseEntity<List<RfaDto>> downloadAllRfas() {
-        List<RfaDto> result = new ArrayList<>();
-        Iterable<RfaEntity> rfaEntities = rfaRepository.findAll();
-        rfaEntities.forEach(rfaEntity -> result.add(convertToRfaDto(rfaEntity)));
-        return ResponseEntity.ok(result);
+    public ResponseEntity<List<RfaDto>> getAllRfas() {
+        return ResponseEntity.ok(rfaService.getAllRfas());
     }
 
     @DeleteMapping(path = "/{id}")
-    void deleteRfa(@PathVariable("id") Long id) {
-        try {
-            rfaRepository.deleteById(id);
-        } catch (Exception e) {
-            logger.info("Attempt to delete non-existing RFA with id {}", id, e);
-        }
+    public void deleteRfa(@PathVariable("id") Long id) {
+        rfaService.deleteRfa(id);
     }
 
     @DeleteMapping()
-    void deleteAllRfas() {
-        rfaRepository.deleteAll();
+    public void deleteAllRfas() {
+        rfaService.deleteAllRfas();
     }
 
-    private RfaDto convertToRfaDto(RfaEntity rfaEntity) {
-        RfaDto rfaDto = new RfaDto();
-        rfaDto.setId(rfaEntity.getId());
-        rfaDto.setContent(rfaEntity.getContent());
-        return rfaDto;
-    }
 
 }
