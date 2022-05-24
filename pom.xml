@@ -18,6 +18,7 @@
 		<java.version>11</java.version>
 		<spring-cloud-starter-contract-verifier.version>3.1.2</spring-cloud-starter-contract-verifier.version>
 		<lombok.version>1.18.22</lombok.version>
+		<springdoc-openapi-ui.version>1.6.8</springdoc-openapi-ui.version>
 	</properties>
 
 	<licenses>
@@ -79,6 +80,11 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>${springdoc-openapi-ui.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -94,6 +100,7 @@
 			<version>${spring-cloud-starter-contract-verifier.version}</version>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>
