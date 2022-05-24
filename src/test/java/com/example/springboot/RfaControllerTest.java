@@ -56,7 +56,7 @@ class RfaControllerTest {
 
         Long id = captor.getValue();
 
-        RfaEntity rfaEntity = rfaRepository.findById(id).orElseThrow(() -> new Exception());
+        RfaEntity rfaEntity = rfaRepository.findById(id).orElseThrow(Exception::new);
         assertEquals(rfaEntity.getContent(), rfaContent);
     }
 
@@ -86,11 +86,11 @@ class RfaControllerTest {
                 .andReturn();
         String contentAsString = mvcResult.getResponse().getContentAsString();
         ObjectMapper objectMapper = new ObjectMapper();
-        RfaEntity rfaEntityResponse = objectMapper.readValue(contentAsString, RfaEntity.class);
+        RfaDto rfaDto = objectMapper.readValue(contentAsString, RfaDto.class);
 
         //Then
-        assertEquals(rfaEntity.getId(), rfaEntityResponse.getId());
-        assertEquals(rfaEntity.getContent(), rfaEntityResponse.getContent());
+        assertEquals(rfaEntity.getId(), rfaDto.getId());
+        assertEquals(rfaEntity.getContent(), rfaDto.getContent());
     }
 
     @Test
@@ -110,15 +110,16 @@ class RfaControllerTest {
                 .andReturn();
         String contentAsString = mvcResult.getResponse().getContentAsString();
         ObjectMapper objectMapper = new ObjectMapper();
-        List<RfaEntity> rfaEntitiesResponse = objectMapper.readValue(contentAsString,
-                new TypeReference<List<RfaEntity>>() {});
+        List<RfaDto> rfaDtosResponse = objectMapper.readValue(contentAsString,
+                new TypeReference<List<RfaDto>>() {
+                });
 
         // Then
         for (int index = 0; index < 4; index++) {
             RfaEntity rfaEntity = rfaEntities.get(index);
-            RfaEntity rfaEntityResponse = rfaEntitiesResponse.get(index);
-            assertEquals(rfaEntity.getId(), rfaEntityResponse.getId());
-            assertEquals(rfaEntityResponse.getContent(), rfaEntityResponse.getContent());
+            RfaDto rfaDtoResponse = rfaDtosResponse.get(index);
+            assertEquals(rfaEntity.getId(), rfaDtoResponse.getId());
+            assertEquals(rfaEntity.getContent(), rfaDtoResponse.getContent());
         }
     }
 

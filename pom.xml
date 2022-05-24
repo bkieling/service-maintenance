@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<spring-cloud-starter-contract-verifier.version>3.1.2</spring-cloud-starter-contract-verifier.version>
 	</properties>
 
 	<licenses>
@@ -69,7 +70,6 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -81,8 +81,9 @@
             <scope>test</scope>
         </dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-contract-verifier</artifactId>
+			<version>${spring-cloud-starter-contract-verifier.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -111,6 +112,17 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-contract-maven-plugin</artifactId>
+				<version>${spring-cloud-starter-contract-verifier.version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<baseClassForTests>
+						com.example.springboot.BaseTestClass
+					</baseClassForTests>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

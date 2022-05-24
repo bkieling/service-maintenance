@@ -34,17 +34,17 @@ public class RfaController {
     }
 
     @GetMapping(path = "/{id}")
-    ResponseEntity<RfaEntity> downloadRfa(@PathVariable("id") Long id) {
+    ResponseEntity<RfaDto> downloadRfa(@PathVariable("id") Long id) {
         return rfaRepository.findById(id)
-                .map(rfaEntity -> ResponseEntity.ok(rfaEntity))
+                .map(rfaEntity -> ResponseEntity.ok(convertToRfaDto(rfaEntity)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping()
-    ResponseEntity<List<RfaEntity>> downloadAllRfas() {
-        List<RfaEntity> result = new ArrayList<>();
+    ResponseEntity<List<RfaDto>> downloadAllRfas() {
+        List<RfaDto> result = new ArrayList<>();
         Iterable<RfaEntity> rfaEntities = rfaRepository.findAll();
-        rfaEntities.forEach(result::add);
+        rfaEntities.forEach(rfaEntity -> result.add(convertToRfaDto(rfaEntity)));
         return ResponseEntity.ok(result);
     }
 
@@ -55,11 +55,18 @@ public class RfaController {
         } catch (Exception e) {
             logger.info("Attempt to delete non-existing RFA with id {}", id, e);
         }
-
     }
 
     @DeleteMapping()
     void deleteAllRfas() {
         rfaRepository.deleteAll();
     }
+
+    private RfaDto convertToRfaDto(RfaEntity rfaEntity) {
+        RfaDto rfaDto = new RfaDto();
+        rfaDto.setId(rfaEntity.getId());
+        rfaDto.setContent(rfaEntity.getContent());
+        return rfaDto;
+    }
+
 }
