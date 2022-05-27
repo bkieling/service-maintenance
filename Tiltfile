@@ -1,4 +1,4 @@
-SOURCE_IMAGE = os.getenv("SOURCE_IMAGE", default='fcaroline/service-maintenance-source')
+SOURCE_IMAGE = os.getenv("SOURCE_IMAGE", default='web-practice-fleet/service-maintenance-source')
 LOCAL_PATH = os.getenv("LOCAL_PATH", default='.')
 NAMESPACE = os.getenv("NAMESPACE", default='webfleet')
 
