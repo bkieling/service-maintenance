@@ -14,13 +14,6 @@
 	<name>Service-Maintenance</name>
 	<description>WeB Fleet Service Maintenance</description>
 
-	<properties>
-		<java.version>11</java.version>
-		<spring-cloud-starter-contract-verifier.version>3.1.2</spring-cloud-starter-contract-verifier.version>
-		<lombok.version>1.18.22</lombok.version>
-		<springdoc-openapi-ui.version>1.6.8</springdoc-openapi-ui.version>
-	</properties>
-
 	<licenses>
 		<license>
 			<name>Apache License, Version 2.0</name>
@@ -94,13 +87,6 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-contract-verifier</artifactId>
-			<version>${spring-cloud-starter-contract-verifier.version}</version>
-			<scope>test</scope>
-		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -127,17 +113,6 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-contract-maven-plugin</artifactId>
-				<version>${spring-cloud-starter-contract-verifier.version}</version>
-				<extensions>true</extensions>
-				<configuration>
-					<baseClassForTests>
-						com.example.springboot.BaseTestClass
-					</baseClassForTests>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
