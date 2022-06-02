@@ -7,9 +7,9 @@ metadata:
     app.kubernetes.io/part-of: service-maintenance
     apps.tanzu.vmware.com/has-tests: true
 spec:
-  env:
-    - name: JAVA_TOOL_OPTIONS
-      value: "-XX:MaxMetaspaceSize=131072K"
+#  env:
+#    - name: JAVA_TOOL_OPTIONS
+#      value: "-XX:MaxMetaspaceSize=131072K"
   params:
   - name: annotations
     value:
