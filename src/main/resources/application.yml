@@ -1,21 +1,19 @@
 spring:
   application:
     name: service-maintenance
-  datasource:
-    url: jdbc:hsqldb:mem:testdb
   jpa:
     hibernate:
       ddl-auto: update
   thymeleaf:
     cache: false
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always
 
 web:
   message: Welcome to WeB Fleet Service/Maintenance
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "local"
+  datasource:
+    url: jdbc:hsqldb:mem:testdb
