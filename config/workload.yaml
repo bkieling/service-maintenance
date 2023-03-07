@@ -15,16 +15,16 @@ spec:
     value:
       autoscaling.knative.dev/minScale: "1"
   serviceClaims:
-  - name: mysql
-    ref:
-      apiVersion: with.sql.tanzu.vmware.com/v1
-      kind: MySQL
-      name: mysql-webfleet
-  - name: rmq
-    ref:
-      apiVersion: services.apps.tanzu.vmware.com/v1alpha1
-      kind: ResourceClaim
-      name: rmq-1
+    - name: mysql
+      ref:
+        apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+        kind: ClassClaim
+        name: mysql
+    - name: rmq
+      ref:
+        apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+        kind: ClassClaim
+        name: rmq-1
   source:
     git:
       url: https://github.com/bkieling/service-maintenance.git

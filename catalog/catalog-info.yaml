@@ -3,12 +3,6 @@ kind: Component
 metadata:
   name: service-maintenance
   description: WeB Fleet Service/Maintenance
-  tags:
-    - app-accelerator
-    - java
-    - spring
-    - web
-    - tanzu
   annotations:
     'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/part-of=service-maintenance'
 spec:
